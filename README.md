@@ -1,5 +1,7 @@
 # Omniauth::ImisIsg
 
+[![Build Status](https://travis-ci.org/blueskybroadcast/omniauth-imis-isg.svg?branch=master)](https://travis-ci.org/blueskybroadcast/omniauth-imis-isg)
+
 iMIS ISG strategy implementation
 
 ## Installation
