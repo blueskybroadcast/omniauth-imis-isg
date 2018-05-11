@@ -16,6 +16,12 @@ RSpec.describe OmniAuth::Strategies::ImisIsg do
         it { expect(subject.options.client_options.login_page_url).to eq 'MUST_BE_PROVIDED' }
       end
     end
+
+    describe '#app_options' do
+      describe '#app_event_id' do
+        it { expect(subject.options.app_options.app_event_id).to be_nil }
+      end
+    end
   end
 
   describe '#info' do

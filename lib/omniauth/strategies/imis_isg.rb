@@ -5,6 +5,8 @@ module OmniAuth
     class ImisIsg < OmniAuth::Strategies::OAuth2
       option :name, 'imis_isg'
 
+      option :app_options, { app_event_id: nil }
+
       option :client_options, { login_page_url: 'MUST_BE_PROVIDED' }
 
       uid { info[:uid] }
@@ -16,8 +18,11 @@ module OmniAuth
       end
 
       def callback_phase
+        account = Account.find_by(slug: account_slug)
+        app_event = account.app_events.where(id: options.app_options.app_event_id).first_or_create(activity_type: 'sso')
         self.env['omniauth.auth'] = auth_hash
         self.env['omniauth.origin'] = '/' + account_slug
+        self.env['omniauth.app_event_id'] = app_event.id
         call_app!
       end
 
